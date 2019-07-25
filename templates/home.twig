@@ -1,9 +1,25 @@
 <!doctype html>
 <html lang ="en">
 <head>
-<title></title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <title></title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script scr="node_modules/jquery/dist/jquery.min.js"></script>
+        <script scr="node_modules/popper.js/dist/umd/popper.min.js"><script>
+        <script scr="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
-</head>
+    </head>
+<body>
+        <main class="container">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-md-3">
+                    <h3>{{product.name}}</h3>
+                    <h6>{{product.price}}</h6>
+                    <p>{{product.description}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </body>
 </html>

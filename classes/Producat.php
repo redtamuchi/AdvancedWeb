@@ -21,6 +21,7 @@ public function getProducts(){
                 array_push( $this -> products, $row );
             }
         }
+        return $this -> products;
     }
 }
 ?>
