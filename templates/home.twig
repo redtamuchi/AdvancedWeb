@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang ="en">
+<html>
 
 {% include 'partials/head.twig'%}
 
@@ -14,7 +14,7 @@
                     <h3>{{product.name}}</h3>
                     <h6>{{product.price}}</h6>
                     <p>{{product.description | slice(0,50) ~ '....'}}</p>
-                    <a href="detail.php?product_id={{product.product_id}}">Info</a>
+                    <a href="detail.php?product_id={{product.product_id}}">Detail</a>
                 </div>
                 {% endfor %}
             </div>

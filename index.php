@@ -2,17 +2,23 @@
 require('vendor/autoload.php');
 
 use aitsydney\Product;
-
 //creat an instance of Product class
-$p = new Product();
-$products = $p -> getProducts(); // $p->getProducts();
+$products = new Product();
+$products_result = $products -> getProducts();
 
-// print_r($products);
-
+//create twig loader
+//$loader = new \Twig\Loader\Filesystem('templates');
 $loader = new Twig_Loader_Filesystem('templates');
+
+//create twig environment
 $twig = new Twig_Environment($loader);
-//call a twig template
+
+//load a twig template
 $template = $twig -> load('home.twig');
-//output the tamplate and data 
-echo $template -> render(array('products' => $products,'title' => "welcome to the shop"));
+
+//pass values to twig
+echo $template -> render([
+    'products' => $products_result,
+    'title' => 'Hello shop'
+]);
 ?>
