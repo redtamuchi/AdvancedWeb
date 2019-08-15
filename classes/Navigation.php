@@ -1,4 +1,4 @@
-<?
+<?php
 namespace aitsydney;
 
 use aitsydney\Database;
@@ -33,13 +33,19 @@ class Navigation extends Database{
     $statement = $this -> connection -> prepare ($query);
     $statement ->bind_param('ii', $min_level,$max_level);
     if( $statement -> execute() ){
+        $result = $statement -> get_result();
         $nav_items = array();
         while( $row = $result -> fetch_assoc() ){
             array_push( $nav_items, $row);
         }
         $this -> nav_array['navigation'] = $nav_items;
+        $this -> nav_array['active'] = $this -> getActive();
     }
+  return $this -> nav_array;
 }
+public function getActive(){
 
+    return basename($_SERVER['PHP_SELF']);
+}
 }
 ?>

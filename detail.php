@@ -25,6 +25,7 @@ $template = $twig -> load('detail.twig');
 
 //pass values to twig
 echo $template -> render(array(
+    'navigation' => $navigation,
     'detail' => $detail,
     'title' => $detail['product']['name']));
 ?>
