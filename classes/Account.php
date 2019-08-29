@@ -67,52 +67,7 @@ class Account extends Database{
   }
 
   public function login( $email, $password ){
-    $response = array();
 
-    $query = "
-    SELECT  HEX(account_id) as account_id,email,password
-    FROM account
-    WHERE email = ? 
-    ";
-    try{
-      $statement = $this -> connection -> prepare( $query );
-      if( $statement == false ){
-        throw new \Exception('query error');
-      }
-      if( $statement -> bind_param('s',$email) == false ){
-        throw new \Excemption('parameter error');
-      }
-      if( $statement -> execute() == false ){
-        throw new \Exception('execution error');
-      }
-      else{
-        //query runs successfully
-        $result = $statement -> get_result();
-        if( $result -> num_rows == 0 ){
-          //account does not exist in database
-        }
-      else {
-        //see if passwords match
-        $account = $result -> fetch_assoc();
-        if( password_verify($password,$account['password']) == false){
-          //password dont match
-          $errors['account'] = 'credentials do not match our records ';
-          }
-    
-        }
-      }
-    }
-    catch( Exeception $exc){
-      error_log( $exc -> getMesssage() );
-    }
-    //check if there are errors
-    $response[ 'success'] = false;
-    $response[ 'errors' ] = $errors;
-  }
-  else{
-    $response['success'] = true;
-    $this -> setUserSession( $account['account_id'];)
-  }
   }
 }
 ?>
