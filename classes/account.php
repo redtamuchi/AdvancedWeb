@@ -29,7 +29,7 @@ class Account extends Database{
         //query to insert into database
         $qurey = " 
         INSERT INTO account ( acount_id,email,password,created,accessed,updated)
-        VALUES ( ?,?, ?,NOW(),NOW(),NOW() )
+        VALUES ( UNHEX(?),?, ?,NOW(),NOW(),NOW() )
         " ;
         try{
          $statement =  $this ->connection->prepare($qurey);
@@ -42,7 +42,8 @@ class Account extends Database{
         }
         else{
         //acount is created
-        $register_response['errors'] = $register_errors;
+        $register_response['success'] = true;
+        $this -> setUserSession( $id );
       }
      }
      catch(Excemption $exc ){
@@ -61,7 +62,7 @@ class Account extends Database{
 
     public function createAacountId(){
         if ( function_exists('random_bytes')){
-            $bytes = random_bytes(8);
+            $bytes = random_bytes(16);
         }
         else{
             $bytes = openssl_random_pseudo_bytes(8);
@@ -70,6 +71,17 @@ class Account extends Database{
     }   
 
 
+
+    private function setUserSession( $account_id ){
+        if ( session_status() == PHP_SESSION_NONE ){
+            session_start();
+        }
+        $_SESSION['auth'] = $account_id;
+    }
+
+    public function logout(){
+        unset( $_SESSION['auth'] );
+    }
 
     public function login( $email, $password ){
 

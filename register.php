@@ -19,6 +19,9 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ){
  
     $acc = new Account();
     $register = $acc -> register ( $email, $password );
+}else{
+$register = '';
+
 }
 
 
