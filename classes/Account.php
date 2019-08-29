@@ -67,6 +67,7 @@ class Account extends Database{
   }
 
   public function login( $email, $password ){
+    $response = array();
 
   }
 }

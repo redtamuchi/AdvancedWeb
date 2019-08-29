@@ -106,12 +106,13 @@ class Account extends Database{
       error_log( $exc -> getMesssage() );
     }
     //check if there are errors
+    if( count($errors) > 0 ){
     $response[ 'success'] = false;
     $response[ 'errors' ] = $errors;
   }
   else{
     $response['success'] = true;
-    $this -> setUserSession( $account['account_id'];)
+    $this -> setUserSession( $account['account_id']);
   }
   }
 }
